@@ -1,0 +1,18 @@
+/* styles/components/footer.css */
+.footer {
+  text-align: center;
+  padding: 28px 64px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 24px;
+  }
+}

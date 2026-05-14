@@ -1,0 +1,46 @@
+/* styles/components/sections.css */
+.section {
+  padding: 96px 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-alt {
+  background: var(--surface);
+}
+
+.section-pre {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--primary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.05;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.section-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--primary);
+  margin-bottom: 56px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 72px 24px;
+  }
+}
