@@ -42,7 +42,7 @@ const projects = [
   },
 
   {
-    name: "Synclirix",
+    name: "Synclirix Backend",
     type: "A colllaborative project: Multi-user workspace platform",
     badge: "badge-live",
     badgeLabel: "Almost live",
