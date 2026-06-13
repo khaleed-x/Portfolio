@@ -14,8 +14,7 @@ export default function Contact() {
         <div className="contact-card">
           <div className="contact-title">Let's build <em>something.</em></div>
           <p className="contact-subtitle">
-            Open to internship roles, junior developer positions, and collaboration
-            on interesting projects —  in the World tech space.
+            Open to software engineering opportunities where i can contribute to scalable backend and full-stack systems. 
           </p>
           <div className="contact-links">
             {contacts.map((contact) => (

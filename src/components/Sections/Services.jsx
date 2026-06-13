@@ -3,8 +3,8 @@ const services = [
   {
     number: "01",
     title: "Web Platforms",
-    desc: "Production-grade ASP.NET Core applications — e-commerce, fintech systems, dashboard, APIs, and business platforms built for real world use.",
-    tags: ["ASP.NET Core", "Web API", "Entity Framework", "PostgreSQL", "React"],
+    desc: "Production-grade ASP.NET Core applications, — e-commerce, fintech systems, dashboard, APIs, and business platforms built for real world use.",
+    tags: ["ASP.NET Core", "Web API", "Entity Framework", "PostgreSQL", "SQL Server", "React"],
   },
   {
     number: "02",
