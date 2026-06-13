@@ -33,7 +33,7 @@ const projects = [
 
   {
     name: "Velora",
-    type: "Platform · Open Source",
+    type: "Collaborative project: Platform · Open Source",
     badge: "badge-progress",
     badgeLabel: "In Progress",
     desc: "Open-source, language-agnostic distributed background job processor — similar to Hangfire or Celery but designed for multi-language workers through a shared broker and unified API.",
@@ -43,7 +43,7 @@ const projects = [
 
   {
     name: "Synclirix Backend",
-    type: "A colllaborative project: Multi-user workspace platform",
+    type: "Collaborative project: Multi-user workspace platform",
     badge: "badge-live",
     badgeLabel: "Almost live",
     desc: "A multi-user workspace platform where teams create projects, manage tasks, and collaborate in real time — with structured role-based permissions, full activity tracking, and everything in sync.",
