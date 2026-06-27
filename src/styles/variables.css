@@ -53,12 +53,17 @@
 /* Dark Mode */
 [data-theme="dark"] {
   --primary: #C8145A;
-  --primary-dark: #9E0F47;
+
+  --primary-dark: #9E0F47; 
+
   --primary-light: rgba(200, 20, 90, 0.15);
-  --primary-glow: rgba(200, 20, 90, 0.12);
+  --primary-glow: rgba(200, 20, 90, 0.12); 
+
   
   --gold: #C9A84C;
   --gold-light: rgba(201, 168, 76, 0.15);
+
+
   
   --bg: #0F172A;
   --surface: #1E293B;
