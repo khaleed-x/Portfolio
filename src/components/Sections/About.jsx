@@ -9,30 +9,23 @@ export default function About() {
   return (
     <section className="section section-alt" id="about">
       <div className="section-pre">// 01 — About</div>
-      <h2 className="section-title">The story <em>so far</em></h2>
+      <h2 className="section-title">Engineering <em>Philosophy</em></h2>
       <div className="section-rule" />
       
       <div className="about-grid">
         <div className="about-body">
           <p>
-            I started with <strong>basic Java</strong> during my ND1 java Lectures, Fastforward to SIWES at SoftcodTechNG in 2024. 
-            The programme covered C#, PHP, and graphic design — I made a deliberate choice 
-            to go deep on <strong>C# WinForms</strong>, leaving as a confident desktop developer.
+            I'm a backend software engineer who designs reliable, maintainable, and scalable systems with <strong>ASP.NET Core</strong>.I enjoy solving problems beyond feature implementation—thinking through architecture, service boundaries, data flow, and the trade-offs that shape production-ready software.
           </p>
           <p>
-            A year later, on the advice of my instructor, I took on my biggest challenge: 
-            transitioning from Windows Forms to <strong>ASP.NET Core</strong> with no guided curriculum. 
-            Just consistency, the right mental models, and a stubbornness to ship.
+             I believe good software isn't measured by the number of features it contains, but by how well it evolves over time. That belief naturally draws me toward clean architecture, domain-driven design, asynchronous processing, and distributed systems. I'm fascinated not only by how software works, but why certain architectural decisions lead to systems that remain reliable and maintainable as they grow.
           </p>
           <p>
-            The result: a <strong>fully production-ready e-commerce platform</strong> with background workers, 
-            image compression, Paystack payments, and a complete admin dashboard. Now building a fintech 
-            product and co-building a distributed job processing platform.
+             My engineering foundation was built through <strong>C#</strong> during my industrial training, before independently transitioning into ASP.NET Core. That journey taught me how to approach unfamiliar technologies through documentation, experimentation, and hands-on problem solving rather than relying on guided tutorials. It also shaped the way I learn today—by understanding principles first and applying them through real-world systems.
+        
           </p>
           <p>
-            Outside software, I'm a <strong>professional fashion designer</strong> — I make bespoke men's clothing 
-            from scratch. Both crafts share the same obsession: precision, clean architecture, and things 
-            that actually work.
+             Outside software, I design bespoke menswear. Although the disciplines are different, both demand the same mindset: precision, thoughtful design, and attention to detail. Whether I'm designing an application or a garment, I enjoy creating systems that are intentional, functional, and built to last.
           </p>
         </div>
         

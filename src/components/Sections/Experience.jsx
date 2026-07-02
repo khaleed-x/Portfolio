@@ -15,10 +15,8 @@ const timeline = [
     role: "Software Development Intern (SIWES)",
     org: "SoftcodTechNG, Ibadan",
     points: [
-      "Completed industrial training in C# WinForms, PHP web development, and graphic design",
-      "Focused intensively on C# — exited the programme as a Windows Forms developer",
-      "Later transitioned independently into ASP.NET Core MVC web development",
-      "Awarded SIWES Industrial Training Certificate",
+      "Completed industrial training focused on C#, web development, and software engineering fundamentals. This experience established my foundation in C# and object-oriented programming, which later enabled my transition into backend development with ASP.NET Core.",
+      "Awarded SIWES Industrial Training Certificate upon completion",
     ],
   },
   {

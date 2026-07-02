@@ -11,10 +11,9 @@ export default function Hero({scrollToSection}) {
         <h1 className="hero-name">
           Khalid<em>Oyekunle.</em>
         </h1>
-        <p className="hero-role">Backend Developer · ASP.NET Core · System Builder</p>
+        <p className="hero-role">Backend Software Engineer · ASP.NET Core</p>
         <p className="hero-desc">
-          Backend-focused .NET developer building production grade web system with ASP.NET Core.
-          Experienced in e-commerce, fintech, background processing, and scallable application architecture
+        I build backend systems with a strong focus on software architecture, scalability, and clean engineering principles. My work spans production web platforms, financial systems, and distributed applications, with an emphasis on designing software that remains reliable and maintainable as it grows.
         </p>
         <div className="hero-btns">
           <button className="btn-primary" onClick={()=>scrollToSection('projects')}>
