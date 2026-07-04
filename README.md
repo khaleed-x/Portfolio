@@ -1,16 +1,107 @@
-# React + Vite
+# Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive portfolio built to showcase my backend engineering projects, technical experience, and software engineering journey.
 
-Currently, two official plugins are available:
+The portfolio was designed with simplicity, performance, and maintainability in mind, serving as a central hub for my projects, résumé, and professional profile.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live Demo:** https://khaleed-portfolio.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Overview
 
-## Expanding the ESLint configuration
+This portfolio presents my work as a Backend Software Engineer, highlighting production-ready applications, distributed systems projects, and backend architecture while providing a clean and accessible user experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Rather than acting as a simple personal website, it reflects my engineering philosophy, technical growth, and approach to building maintainable software.
+
+---
+
+## Features
+
+- Responsive design for desktop and mobile devices
+- Dark/Light theme toggle
+- Modern component-based architecture
+- Engineering philosophy and professional profile
+- Featured software projects
+- Technical skills and technology stack
+- Résumé download
+- Contact information
+
+---
+
+## Design Principles
+
+The portfolio was built with an emphasis on:
+
+- Clean and intuitive user experience
+- Responsive layouts
+- Component reusability
+- Maintainable codebase
+- Performance optimization
+- Professional presentation
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- JavaScript
+- HTML5
+- CSS3
+
+### Tools
+
+- Git
+- GitHub
+- Vercel
+
+---
+
+## Project Structure
+
+```text
+src
+├── components
+├── assets
+├── styles
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## Running Locally
+
+```bash
+git clone https://github.com/khaleed-x/portfolio.git
+
+cd portfolio
+
+npm install
+
+npm run dev
+```
+
+---
+
+## Future Improvements
+
+- Blog and technical writing section
+- Case studies for engineering projects
+- Project architecture diagrams
+- Internationalization support
+
+---
+
+## Author
+
+**Khalid Ayomide Oyekunle**
+
+Backend Software Engineer
+
+🌐 Portfolio: https://khaleed-portfolio.vercel.app
+
+💼 LinkedIn: https://linkedin.com/in/khalid-oyekunle-54944230b
