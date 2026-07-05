@@ -1,5 +1,5 @@
 # Developer Portfolio
-![Portfolio Preview](./IMG_3449.png)
+![Portfolio Preview](./preview.png)
 
 A modern, responsive portfolio built to showcase my backend engineering projects, technical experience, and software engineering journey.
 

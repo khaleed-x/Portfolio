@@ -2,9 +2,9 @@
 export default function Contact() {
   const contacts = [
     { label: "Email", href: "mailto:Oyekunlekhalid0122@gmail.com", icon: "✉" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/khalid-ayomide-54944230b", icon: "in" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/khalid-oyekunle-54944230b", icon: "in" },
     { label: "GitHub", href: "https://github.com/khaleed-x", icon: "⎇" },
-    { label: "Twitter / X", href: "https://twitter.com/kha_leed_x", icon: "𝕏" },
+    { label: "Twitter / X", href: "https://twitter.com/khaleed_x22", icon: "𝕏" },
     { label: "WhatsApp", href: "https://wa.me/2349061421795", icon: "💬" },
   ];
 
