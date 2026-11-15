@@ -26,7 +26,27 @@ function frontmatter(raw) {
   return data
 }
 
-function page({ title, description, path, image, type = 'website', published }) {
+// Structured data (JSON-LD) helps Google understand who you are and what each page is.
+const ld = (obj) =>
+  `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE_NAME,
+  alternateName: ['Khalid Ayomide Oyekunle', 'khaleed.x'],
+  jobTitle: 'Software Engineer',
+  url: SITE_URL,
+  sameAs: [
+    'https://github.com/khaleed-x',
+    'https://www.linkedin.com/in/khalid-oyekunle-54944230b',
+    'https://twitter.com/khaleed_x22',
+  ],
+  knowsAbout: ['C#', 'ASP.NET Core', 'Software architecture', 'Modular monoliths', 'Backend engineering'],
+}
+const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL }
+
+function page({ title, description, path, image, type = 'website', published, jsonld = [] }) {
   const url = abs(path)
   const img = abs(image || DEFAULT_IMAGE)
   const tags = [
@@ -45,6 +65,7 @@ function page({ title, description, path, image, type = 'website', published }) 
     `<meta name="twitter:title" content="${esc(title)}" />`,
     `<meta name="twitter:description" content="${esc(description)}" />`,
     `<meta name="twitter:image" content="${img}" />`,
+    ...jsonld.map(ld),
   ].filter(Boolean).join('\n    ')
 
   return template
@@ -59,11 +80,11 @@ function write(path, html) {
   writeFileSync(join(dir, 'index.html'), html)
 }
 
-const siteDescription = 'Lead Backend Engineer at Hosté. C#, .NET, modular monoliths and distributed systems.'
+const siteDescription = 'Software Engineer. C#, ASP.NET Core, sound engineering principles, thoughtful system design.'
 const urls = ['/']
 
 // Home (overwrites dist/index.html with default tags)
-writeFileSync(join(dist, 'index.html'), page({ title: SITE_NAME, description: siteDescription, path: '/' }))
+writeFileSync(join(dist, 'index.html'), page({ title: `${SITE_NAME} — Software Engineer`, description: siteDescription, path: '/', jsonld: [personLd, websiteLd] }))
 
 // Blog index
 write('blog', page({ title: `Blog · ${SITE_NAME}`, description: 'Notes and writing on backend engineering, architecture and .NET.', path: '/blog' }))
@@ -82,6 +103,16 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {
     image: data.image,
     type: 'article',
     published: data.date,
+    jsonld: [{
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: data.title || slug,
+      description: data.summary || siteDescription,
+      datePublished: data.date,
+      image: abs(data.image || DEFAULT_IMAGE),
+      mainEntityOfPage: abs(`/blog/${slug}`),
+      author: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
+    }],
   }))
   urls.push(`/blog/${slug}`)
 }
