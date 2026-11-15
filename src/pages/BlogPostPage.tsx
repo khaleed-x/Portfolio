@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import { formatDate, getPost, posts, PostCard } from '@/features/blog'
+import { formatDate, getPost, posts, PostCard, Comments } from '@/features/blog'
 import { ShareButton } from '@/shared/ui/ShareButton'
 import { usePageTitle } from '@/shared/hooks/usePageTitle'
 import { NotFoundPage } from './NotFoundPage'
@@ -25,6 +25,7 @@ export function BlogPostPage() {
         <ReactMarkdown>{post.body}</ReactMarkdown>
       </div>
       <ShareButton title={post.title} text={post.summary} />
+      <Comments key={post.slug} term={`blog/${post.slug}`} />
 
       {more.length > 0 && (
         <>

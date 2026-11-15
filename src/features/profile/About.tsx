@@ -1,14 +1,14 @@
 import { SectionHeader } from '@/shared/ui/SectionHeader'
-import { projects } from '@/content/projects'
-import { skills } from '@/content/skills'
+// import { projects } from '@/content/projects'
+// import { skills } from '@/content/skills'
 
 export function About() {
-  const languages = skills.find((s) => s.label === 'Languages')?.items.length ?? 0
-  const stats = [
-    { number: `${projects.length}`, label: 'Projects built' },
-    { number: `${languages}`, label: 'Languages used' },
-    { number: 'Lead', label: 'Backend at Hosté' },
-  ]
+  // const languages = skills.find((s) => s.label === 'Languages')?.items.length ?? 0
+  // const stats = [
+  //   { number: `${projects.length}`, label: 'Projects built' },
+  //   { number: `${languages}`, label: 'Languages used' },
+  //   { number: 'Lead', label: 'Backend at Hosté' },
+  // ]
 
   return (
     <section className="section section-alt" id="about">

@@ -47,3 +47,6 @@ a.project-card-link { display: block; text-decoration: none; color: inherit; }
 .share-row { display: grid; gap: 10px; margin: 28px 0 8px; }
 .more-title { margin: 48px 0 16px; font-size: 22px; }
 @media (min-width: 640px) { .share-row { display: flex; } }
+
+.comments { margin-top: 40px; }
+.comments-note { margin-top: 32px; padding: 12px 14px; border: 1px dashed var(--border); border-radius: var(--radius); color: var(--text-muted); font-size: 13px; }
