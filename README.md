@@ -1,108 +1,51 @@
-# Developer Portfolio
-![Portfolio Preview](./preview.png)
+# Portfolio — Khalid Oyekunle
 
-A modern, responsive portfolio built to showcase my backend engineering projects, technical experience, and software engineering journey.
+React + TypeScript + Vite portfolio with project case studies, a Markdown blog, and a pluggable AI assistant.
 
-The portfolio was designed with simplicity, performance, and maintainability in mind, serving as a central hub for my projects, résumé, and professional profile.
+**Live:** https://khalid-oyekunle.vercel.app
 
-**Live Demo:** https://khaleed-portfolio.vercel.app
-
----
-
-## Overview
-
-This portfolio presents my work as a Backend Software Engineer, highlighting production-ready applications, distributed systems projects, and backend architecture while providing a clean and accessible user experience.
-
-Rather than acting as a simple personal website, it reflects my engineering philosophy, technical growth, and approach to building maintainable software.
-
----
-
-## Features
-
-- Responsive design for desktop and mobile devices
-- Dark/Light theme toggle
-- Modern component-based architecture
-- Engineering philosophy and professional profile
-- Featured software projects
-- Technical skills and technology stack
-- Résumé download
-- Contact information
-
----
-
-## Design Principles
-
-The portfolio was built with an emphasis on:
-
-- Clean and intuitive user experience
-- Responsive layouts
-- Component reusability
-- Maintainable codebase
-- Performance optimization
-- Professional presentation
-
----
-
-## Tech Stack
-
-### Frontend
-
-- React
-- Vite
-- JavaScript
-- HTML5
-- CSS3
-
-### Tools
-
-- Git
-- GitHub
-- Vercel
-
----
-
-## Project Structure
-
-```text
-src
-├── components
-├── assets
-├── styles
-├── App.jsx
-└── main.jsx
-```
-
----
-
-## Running Locally
+## Run
 
 ```bash
-git clone https://github.com/khaleed-x/portfolio.git
-
-cd portfolio
-
 npm install
-
-npm run dev
+npm run dev        # local dev
+npm run typecheck  # TypeScript
+npm run lint
+npm run build
 ```
 
----
+## Structure
 
-## Future Improvements
+```text
+src/
+├── app/          # app shell: router, layout, theme provider
+├── pages/        # route components (thin; compose features)
+├── features/     # self-contained feature modules
+│   ├── profile/  # hero, about, services, skills, experience, contact
+│   ├── projects/ # cards, grid, gallery, status badge
+│   ├── blog/     # post loader + components
+│   └── ai-chat/  # ChatClient contract, mock + HTTP clients, useChat, widget
+├── content/      # ALL site content as typed data (edit here, not in components)
+│   └── posts/    # blog posts as Markdown files
+├── shared/       # reusable ui, hooks, lib
+└── styles/       # design tokens and CSS
+```
 
-- Blog and technical writing section
-- Case studies for engineering projects
-- Project architecture diagrams
-- Internationalization support
+## Updating content
 
----
+| To change | Edit |
+| --- | --- |
+| Bio, links, role | `src/content/profile.ts` |
+| Skills / experience / services | `src/content/skills.ts`, `experience.ts`, `services.ts` |
+| Add or update a project | `src/content/projects.ts` (images go in `public/projects/<slug>/`) |
+| Write a blog post | new `.md` file in `src/content/posts/` (frontmatter: title, date, summary, tags, draft) |
 
-## Author
+A project's `liveUrl` and `repoUrl` are optional; buttons appear only when set.
 
-**Khalid Ayomide Oyekunle**
+## AI assistant
 
-Backend Software Engineer
+Runs on a mock until `VITE_AI_API_URL` is set. See [docs/ai-integration.md](docs/ai-integration.md).
 
-🌐 Portfolio: https://khaleed-portfolio.vercel.app
+## Deploying
 
-💼 LinkedIn: https://linkedin.com/in/khalid-oyekunle-54944230b
+`vercel.json` rewrites all routes to `index.html` so deep links like `/projects/aurher` work.
