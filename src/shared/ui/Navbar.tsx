@@ -5,7 +5,7 @@ import { useActiveSection } from '@/shared/hooks/useActiveSection'
 import { useScrollState } from '@/shared/hooks/useScrollState'
 import { profile } from '@/content/profile'
 
-const sections = ['about', 'services', 'projects', 'skills', 'experience', 'contact']
+const sections = ['about', 'services', 'projects', 'skills', 'experience',  'education', 'contact']
 const label = (s: string) => s[0].toUpperCase() + s.slice(1)
 
 export function Navbar() {

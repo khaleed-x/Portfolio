@@ -1,6 +1,6 @@
 import { profile } from '@/content/profile'
 
-const chips = ['C#', '.NET', 'Native AOT', 'PostgreSQL']
+const chips = ['.cs', '💭', '💻', '.ts']
 
 export function Hero({ onNavigate }: { onNavigate: (id: string) => void }) {
   return (

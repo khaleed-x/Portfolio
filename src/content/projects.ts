@@ -29,7 +29,7 @@ export const statusLabel: Record<ProjectStatus, string> = {
   completed: 'Completed',
 }
 
-// TODO(khalid): review each status below, some may now be "completed".
+
 export const projects: Project[] = [
   {
     slug: 'velora',
@@ -43,11 +43,35 @@ export const projects: Project[] = [
     ],
     tags: ['Distributed Systems', 'Queue Architecture', 'Worker Orchestration', 'Open Source'],
   },
+
+  {
+    slug: 'hoste',
+    name: 'Hosté',
+    type: 'Professional project · Hospitality Platform',
+    status: 'live',
+    summary:
+      'A hospitality platform built to support its core user, booking, and engagement workflows through a maintainable and scalable software architecture.',
+    details: [
+      'I lead the engineering infrastructure behind Hosté, overseeing its architecture, backend systems, database design, integrations, and deployment operations.',
+      '.',
+    ],
+    tags: [
+      'Node.js',
+      'Express',
+      'TypeScript',
+      'PostgreSQL',
+      'Prisma',
+      'Modular Monolith',
+      'API Integrations',
+    ],
+    liveUrl: 'https://www.bookhostes.com/',
+  },
+
   {
     slug: 'vaultng',
     name: 'VaultNG',
     type: 'Full-stack · Financial Platform',
-    status: 'in-development',
+    status: 'almost-live',
     summary:
       'A financial platform that unifies wallets, instant transfers, goal-based savings, fixed-return investments, and business payment collection behind a single backend.',
     details: [
@@ -72,13 +96,14 @@ export const projects: Project[] = [
     slug: 'synclirix',
     name: 'Synclirix',
     type: 'Collaborative project · Multi-user workspace',
-    status: 'almost-live',
+    status: 'live',
     summary:
       'A collaborative workspace for teams to manage projects, tasks, and workflows in real time, with role-based authorization and activity auditing.',
     details: [
       'A collaborative workspace platform for teams to manage projects, tasks, and workflows in real time. The backend emphasizes role-based authorization, activity auditing, and scalable APIs that keep collaboration synchronized across the application.',
     ],
     tags: ['ASP.NET Core Web API', 'React', 'PostgreSQL'],
+    liveUrl: 'https://synclirix.vercel.app',
   },
   {
     slug: 'portfolio',

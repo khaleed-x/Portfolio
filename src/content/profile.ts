@@ -2,14 +2,14 @@ export const profile = {
   name: 'Khalid Oyekunle',
   fullName: 'Khalid Ayomide Oyekunle',
   handle: 'khaleed.x',
-  role: 'Lead Backend Engineer',
-  company: 'Hosté',
-  eyebrow: 'C# · .NET · Modular Monoliths',
+  role: 'Software Engineer',
+  company: 'khaleed-x Technology',
+  eyebrow: 'C# · .NET · TypeScript · Software Engineering',
   intro:
-    'I lead backend engineering at Hosté, directing the architecture and implementation of its backend. I build systems with a focus on modular design, scalability, and clean engineering, and I care about software that stays reliable and maintainable as it grows.',
+  'I am a Software Engineer focused on building reliable, maintainable, and scalable software systems. I lead the engineering infrastructure at Hosté, overseeing architecture, backend systems, databases, integrations, and deployment operations. I value sound engineering principles, thoughtful system design, and building software that remains dependable as it evolves.',
   cvPath: '/Khalid Oyekunle CV.pdf',
   photo: '/khalid1.PNG',
-  photoBadge: '.NET Engineer',
+  photoBadge: 'Software Engineer',
   links: {
     email: 'mailto:Oyekunlekhalid0122@gmail.com',
     linkedin: 'https://www.linkedin.com/in/khalid-oyekunle-54944230b',
@@ -18,5 +18,5 @@ export const profile = {
     whatsapp: 'https://wa.me/2349061421795',
   },
   availability:
-    'Open to opportunities where I can contribute to scalable backend and full-stack systems.',
+  'Open to software engineering opportunities where I can contribute to building reliable applications, systems, and scalable software solutions.',
 } as const
