@@ -39,7 +39,8 @@ function toPost(path: string, raw: string): Post {
 export const posts: Post[] = Object.entries(files)
   .map(([path, raw]) => toPost(path, raw))
   .filter((p) => !p.draft || import.meta.env.DEV)
-  .sort((a, b) => b.date.localeCompare(a.date))
+ .sort((a, b) => time(b.date) - time(a.date) || b.slug.localeCompare(a.slug))
+
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug)
 
