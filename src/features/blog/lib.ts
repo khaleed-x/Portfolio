@@ -35,6 +35,12 @@ function toPost(path: string, raw: string): Post {
   }
 }
 
+const time = (iso: string) => {
+  const t = Date.parse(iso)
+  return Number.isNaN(t) ? 0 : t
+}
+
+
 /** Drafts are visible in dev only. Newest first. */
 export const posts: Post[] = Object.entries(files)
   .map(([path, raw]) => toPost(path, raw))
