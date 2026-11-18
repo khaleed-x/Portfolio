@@ -2,7 +2,7 @@
 title: The HND vs. B.Sc. Dichotomy in Nigeria: How a Good Idea Became an Academic Caste System
 date: 2026-11-18T10:00
 summary: Two qualifications, the same years of grind, one unequal job market. How Nigeria's HND vs B.Sc. divide began, what it was meant to fix, and where it stands in 2026.
-tags: [education, nigeria, hnd, careers]
+tags: [education, nigeria, Bsc, Hnd, careers]
 image: /hnd-bsc.png
 draft: false
 ---
@@ -82,7 +82,7 @@ Not everyone sees the fix the same way.
 
 It's a real debate. The question is whether we protect the polytechnic's purpose, or give its graduates the recognition they've been denied, and whether we can do both.
 
-## 7. My take: one regulator, one name, many doors
+## 7. My take on this situation : one regulator, one name, many doors
 
 I think the real problem is the referee, not the players.
 
@@ -102,12 +102,11 @@ But I believe one referee, one name and several doors is a cleaner answer than a
 
 - HND is still a valid, awarded qualification.
 - The new B.Tech route isn't real in practice until the law is signed and programmes are accredited.
-- The old top-up route has closed.
-- Before you pay for any "upgrade" programme, confirm its NUC accreditation with your institution.
+- Before you pay for any "upgrade" programme, confirm its NUC accreditation with the institution.
 
 In the meantime, in fields like software engineering, many startups and remote employers care less about the letters on your certificate and more about what you can build and ship. Your GitHub and your projects speak louder than your certificate. That doesn't excuse the bias, but it's a path you control today.
 
-## The takeaway
+## Summary
 
 The HND/B.Sc. divide was never supposed to be a measure of intelligence. It started as a partnership between theory and execution.
 
