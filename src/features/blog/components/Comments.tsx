@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useTheme } from '@/app/theme-context'
 
 const env = import.meta.env
-const configured = Boolean(env.VITE_GISCUS_REPO && env.VITE_GISCUS_REPO_ID && env.VITE_GISCUS_CATEGORY && env.VITE_GISCUS_CATEGORY_ID)
+const configured = Boolean(env.GISCUS_REPO && env.GISCUS_REPO_ID && env.GISCUS_CATEGORY && env.GISCUS_CATEGORY_ID)
 
 /** Giscus comments backed by GitHub Discussions. Renders nothing until configured via env vars. */
 export function Comments({ term }: { term: string }) {
@@ -29,10 +29,10 @@ export function Comments({ term }: { term: string }) {
       s.async = true
       s.crossOrigin = 'anonymous'
       const attrs: Record<string, string> = {
-        repo: env.VITE_GISCUS_REPO!,
-        'repo-id': env.VITE_GISCUS_REPO_ID!,
-        category: env.VITE_GISCUS_CATEGORY!,
-        'category-id': env.VITE_GISCUS_CATEGORY_ID!,
+        repo: env.GISCUS_REPO!,
+        'repo-id': env.GISCUS_REPO_ID!,
+        category: env.GISCUS_CATEGORY!,
+        'category-id': env.GISCUS_CATEGORY_ID!,
         mapping: 'specific',
         term,
         strict: '0',

@@ -1,0 +1,21 @@
+/* Admin panel (mobile first) */
+.admin { max-width: 760px; margin-inline: auto; }
+.admin-card { background: color-mix(in srgb, var(--surface) 82%, transparent); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin: 16px 0; }
+.admin-card h3 { margin: 0 0 12px; }
+.admin-field { display: grid; gap: 6px; margin-bottom: 14px; font-size: 14px; color: var(--text-secondary); }
+.admin-field input:not([type='file']):not([hidden]), .admin-field textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text-primary); font: inherit; font-size: 16px; }
+.admin-field textarea { resize: vertical; line-height: 1.5; }
+.admin-field input:disabled { opacity: .6; }
+.admin-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.admin-check { display: flex; gap: 10px; align-items: center; margin: 8px 0 14px; }
+.admin-thumb { max-width: 100%; border-radius: 10px; border: 1px solid var(--border); }
+.admin-hint { color: var(--text-muted); font-size: 13px; }
+.admin-error { color: var(--danger, #e5484d); font-size: 14px; }
+.admin-post { display: block; width: 100%; text-align: left; padding: 12px 4px; background: none; border: none; border-bottom: 1px solid var(--border); color: var(--text-primary); font: inherit; cursor: pointer; }
+.deploy { display: inline-block; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); margin: 6px 0 12px; font-size: 14px; }
+.deploy-live { border-color: #2ea043; color: #2ea043; }
+.deploy-failed { border-color: #e5484d; color: #e5484d; }
+.deploy-building { border-color: var(--gold); }
+.share-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.share-item code { display: block; margin: 6px 0; font-size: 12px; word-break: break-all; color: var(--text-secondary); }
+.share-actions { display: flex; flex-wrap: wrap; gap: 8px; }

@@ -4,6 +4,9 @@ import { Navbar } from '@/shared/ui/Navbar'
 import { Footer } from '@/shared/ui/Footer'
 import { useReveal } from '@/shared/hooks/useReveal'
 import { ChatWidget } from '@/features/ai-chat'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
+import { useTrackVisit } from '@/shared/hooks/useTrackVisit'
 
 /** Scrolls to #hash targets, or to top on route change. */
 function ScrollManager() {
@@ -23,6 +26,7 @@ function ScrollManager() {
 
 export function RootLayout() {
   useReveal()
+  useTrackVisit()
   return (
     <div className="root">
       <div className="grain" />
@@ -30,6 +34,8 @@ export function RootLayout() {
       <Navbar />
       <Outlet />
       <Footer />
+      <Analytics /> 
+      <SpeedInsights />
       <ChatWidget />
     </div>
   )
