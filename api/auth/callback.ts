@@ -1,4 +1,4 @@
-import { cookie, getCookie, sign, verify } from '../_lib/session'
+import { cookie, getCookie, sign, verify } from '../_lib/session.js'
 
 export async function GET(req: Request) {
   const url = new URL(req.url)

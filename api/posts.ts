@@ -1,5 +1,5 @@
-import { commitFiles, listDir, readFile, type CommitFile } from './_lib/github'
-import { json, requireAdmin } from './_lib/session'
+import { commitFiles, listDir, readFile, type CommitFile } from './_lib/github.js'
+import { json, requireAdmin } from './_lib/session.js'
 
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const POSTS_DIR = 'src/content/posts'

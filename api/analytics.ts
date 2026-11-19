@@ -1,5 +1,5 @@
-import { redis } from './_lib/redis'
-import { json, requireAdmin } from './_lib/session'
+import { redis } from './_lib/redis.js'
+import { json, requireAdmin } from './_lib/session.js'
 
 interface Visit {
   t: number

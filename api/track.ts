@@ -1,5 +1,5 @@
-import { redis } from './_lib/redis'
-import { getCookie, verify } from './_lib/session'
+import { redis } from './_lib/redis.js'
+import { getCookie, verify } from './_lib/session.js'
 
 const RETENTION_DAYS = 90
 const BOT = /bot|crawl|spider|slurp|facebookexternalhit|preview|headless|lighthouse|curl|wget|python-requests/i

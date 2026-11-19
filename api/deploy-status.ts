@@ -1,5 +1,5 @@
-import { deployState } from './_lib/github'
-import { json, requireAdmin } from './_lib/session'
+import { deployState } from './_lib/github.js'
+import { json, requireAdmin } from './_lib/session.js'
 
 export async function GET(req: Request) {
   if (!(await requireAdmin(req))) return json({ error: 'Unauthorised' }, 401)

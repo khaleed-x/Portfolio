@@ -1,4 +1,4 @@
-import { json, requireAdmin } from '../_lib/session'
+import { json, requireAdmin } from '../_lib/session.js'
 
 export async function GET(req: Request) {
   const login = await requireAdmin(req)

@@ -1,4 +1,4 @@
-import { cookie, sign } from '../_lib/session'
+import { cookie, sign } from '../_lib/session.js'
 
 export async function GET() {
   const state = crypto.randomUUID()
