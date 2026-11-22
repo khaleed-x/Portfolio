@@ -160,6 +160,11 @@
 .ad .admin-field input:focus, .ad .admin-field textarea:focus, .ad-search:focus-within, .ed-text:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
 .ad .admin-thumb { max-width: 100%; border-radius: 12px; border: 1px solid var(--border); }
 .ad .pbtn { min-height: 44px; }
+.ed-paper, .ed-paper .prose { overflow-wrap: anywhere; word-break: break-word; }
+.ed-paper img, .ed-paper .prose img { max-width: 100%; height: auto; }
+.ed-text { overflow-wrap: anywhere; }
+
+.ad-actions { display: flex; align-items: center; gap: 10px; }
 
 @media (min-width: 640px) {
   .ad-kpis.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }

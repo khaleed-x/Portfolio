@@ -9,6 +9,8 @@ const paths: Record<string, string> = {
   logout: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9',
   search: 'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.3-4.3',
   back: 'M19 12H5 M12 19l-7-7 7-7',
+  sun: 'M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M12 1v2 M12 21v2 M4.2 4.2l1.4 1.4 M18.4 18.4l1.4 1.4 M1 12h2 M21 12h2 M4.2 19.8l1.4-1.4 M18.4 5.6l1.4-1.4',
+moon: 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z',
 }
 
 export function Icon({ name, size = 20 }: { name: keyof typeof paths | string; size?: number }) {
@@ -18,3 +20,4 @@ export function Icon({ name, size = 20 }: { name: keyof typeof paths | string; s
     </svg>
   )
 }
+

@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react'
 import { Icon } from './icons'
+import { useTheme } from '@/app/theme-context'
 
 export type Tab = 'overview' | 'posts' | 'analytics' | 'links' | 'system'
 
 export const nav: { tab: Tab; label: string; icon: string }[] = [
+  
   { tab: 'overview', label: 'Overview', icon: 'home' },
   { tab: 'posts', label: 'Posts', icon: 'file' },
   { tab: 'analytics', label: 'Analytics', icon: 'chart' },
@@ -23,7 +25,9 @@ interface Props {
 }
 
 export function Shell({ tab, onTab, user, onLogout, title, subtitle, actions, children }: Props) {
+  const { theme, toggleTheme } = useTheme()
   return (
+    
     <div className="ad">
       <aside className="ad-side">
         <div className="ad-brand"><span className="ad-dot" />khaleed.x<em>Admin</em></div>
@@ -48,7 +52,12 @@ export function Shell({ tab, onTab, user, onLogout, title, subtitle, actions, ch
             <h1>{title}</h1>
             {subtitle && <p>{subtitle}</p>}
           </div>
-          <div className="ad-actions">{actions}</div>
+          <div className="ad-actions">
+          <button className="ad-icon-btn" onClick={toggleTheme} aria-label="Toggle light or dark mode" title="Toggle light or dark mode">
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
+          </button>
+          {actions}
+      </div>
         </header>
         <div className="ad-body">{children}</div>
       </main>
