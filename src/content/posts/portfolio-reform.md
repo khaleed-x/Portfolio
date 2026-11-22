@@ -1,10 +1,10 @@
 ---
-title:PORTFOLIO REFORM
+title: PORTFOLIO REFORM
 date: 2026-11-15
 summary: A More Focused Portfolio: What Changed and Why.
-tags: [React, Typescript, Vite ]
+tags: [React, Typescript, Vite]
 image: /reform.png
-draft: false
+draft: true
 ---
 
 # A New Direction for My Portfolio
