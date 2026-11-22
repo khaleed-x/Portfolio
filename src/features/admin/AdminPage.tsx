@@ -1,19 +1,34 @@
 import { useEffect, useState } from 'react'
-import { SectionHeader } from '@/shared/ui/SectionHeader'
-import { getMe, listPosts, logout } from './api'
+import { getMe, logout } from './api'
 import { AnalyticsHub } from './AnalyticsHub'
+import { Icon } from './icons'
 import { LinkBuilder } from './LinkBuilder'
+import { Overview } from './Overview'
 import { PostEditor } from './PostEditor'
+import { PostsPage } from './PostsPage'
+import { QuickLinks } from './QuickLinks'
+import { Shell, type Tab } from './Shell'
+import { SystemPage } from './SystemPage'
 
-type Tab = 'posts' | 'analytics' | 'links'
-type View = { name: 'home' } | { name: 'editor'; slug: string | null }
+const titles: Record<Tab, [string, string]> = {
+  overview: ['Overview', 'How your site is doing'],
+  posts: ['Posts', 'Write, edit and publish'],
+  analytics: ['Analytics', 'Who is reading what'],
+  links: ['Links', 'Share and track'],
+  system: ['System', 'Connections and health'],
+}
+
+const fromHash = (): Tab => {
+  const h = window.location.hash.slice(1) as Tab
+  return h in titles ? h : 'overview'
+}
+
+type Editing = { slug: string | null } | null
 
 export function AdminPage() {
   const [user, setUser] = useState<string | null | undefined>(undefined)
-  const [tab, setTab] = useState<Tab>('posts')
-  const [view, setView] = useState<View>({ name: 'home' })
-  const [slugs, setSlugs] = useState<string[]>([])
-  const [error, setError] = useState('')
+  const [tab, setTab] = useState<Tab>(fromHash)
+  const [editing, setEditing] = useState<Editing>(null)
 
   // Keep this page out of search results
   useEffect(() => {
@@ -30,64 +45,64 @@ export function AdminPage() {
     getMe().then((me) => setUser(me?.login ?? null)).catch(() => setUser(null))
   }, [])
 
-  useEffect(() => {
-    if (user && tab === 'posts' && view.name === 'home') {
-      listPosts().then(setSlugs).catch((e: Error) => setError(e.message))
-    }
-  }, [user, tab, view])
+  const go = (t: Tab) => {
+    setEditing(null)
+    setTab(t)
+    window.history.replaceState(null, '', `#${t}`)
+  }
 
-  if (user === undefined) return <section className="section page-top"><p className="admin-hint">Checking sign-in…</p></section>
+  if (user === undefined) return <div className="ad-gate"><p className="ad-muted">Checking sign-in…</p></div>
 
   if (!user) {
     return (
-      <section className="section page-top admin">
-        <SectionHeader eyebrow="// Admin" title="Private" emphasis="area" />
-        <a className="pbtn pbtn-primary" href="/api/auth/login">Sign in with GitHub</a>
-      </section>
+      <div className="ad-gate">
+        <div className="ad-login">
+          <div className="ad-brand"><span className="ad-dot" />khaleed.x<em>Admin</em></div>
+          <h1>Welcome back</h1>
+          <p className="ad-muted">Sign in with the GitHub account that owns this site.</p>
+          <a className="pbtn pbtn-primary" href="/api/auth/login">Continue with GitHub</a>
+        </div>
+      </div>
     )
   }
 
-  const tabs: [Tab, string][] = [['posts', 'Posts'], ['analytics', 'Analytics'], ['links', 'Links']]
+  const newPost = (
+    <button className="pbtn pbtn-primary ad-new" onClick={() => setEditing({ slug: null })}>
+      <Icon name="plus" size={18} /><span>New post</span>
+    </button>
+  )
+
+  const [title, subtitle] = editing ? [editing.slug ? 'Edit post' : 'New post', 'Changes go live after a short deploy'] : titles[tab]
 
   return (
-    <section className="section page-top admin">
-      <SectionHeader eyebrow={`// Signed in as ${user}`} title="Admin" emphasis="panel" />
-
-      {view.name === 'editor' ? (
-        <PostEditor editSlug={view.slug} onDone={() => setView({ name: 'home' })} />
+    <Shell
+      tab={editing ? 'posts' : tab}
+      onTab={go}
+      user={user}
+      onLogout={async () => {
+        await logout()
+        setUser(null)
+      }}
+      title={title}
+      subtitle={subtitle}
+      actions={!editing && (tab === 'overview' || tab === 'posts') ? newPost : undefined}
+    >
+      {editing ? (
+        <PostEditor key={editing.slug ?? 'new'} editSlug={editing.slug} onDone={() => setEditing(null)} />
+      ) : tab === 'overview' ? (
+        <Overview user={user} onTab={go} onEdit={(slug) => setEditing({ slug })} />
+      ) : tab === 'posts' ? (
+        <PostsPage onEdit={(slug) => setEditing({ slug })} />
+      ) : tab === 'analytics' ? (
+        <AnalyticsHub />
+      ) : tab === 'links' ? (
+        <div className="ad-stack">
+          <LinkBuilder />
+          <QuickLinks />
+        </div>
       ) : (
-        <>
-          <div className="admin-tabs">
-            {tabs.map(([key, name]) => (
-              <button key={key} className={`admin-tab ${tab === key ? 'active' : ''}`} onClick={() => setTab(key)}>{name}</button>
-            ))}
-            <button
-              className="admin-tab"
-              onClick={async () => {
-                await logout()
-                setUser(null)
-              }}
-            >
-              Sign out
-            </button>
-          </div>
-
-          {tab === 'posts' && (
-            <>
-              <button className="pbtn pbtn-primary" onClick={() => setView({ name: 'editor', slug: null })}>+ New post</button>
-              <div className="admin-card">
-                <h3>Posts</h3>
-                {error && <p className="admin-error">{error}</p>}
-                {slugs.map((s) => (
-                  <button key={s} className="admin-post" onClick={() => setView({ name: 'editor', slug: s })}>{s}</button>
-                ))}
-              </div>
-            </>
-          )}
-          {tab === 'analytics' && <AnalyticsHub />}
-          {tab === 'links' && <LinkBuilder />}
-        </>
+        <SystemPage />
       )}
-    </section>
+    </Shell>
   )
 }

@@ -69,3 +69,12 @@ export async function deployState(sha: string): Promise<'building' | 'live' | 'f
   if (state === 'failure' || state === 'error') return 'failed'
   return 'building'
 }
+
+/** True if the token can see the configured repository. */
+export async function repoReachable(): Promise<boolean> {
+  try {
+    return (await gh(`/repos/${repo()}`)).ok
+  } catch {
+    return false
+  }
+}

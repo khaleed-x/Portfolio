@@ -1,123 +1,59 @@
-import { useEffect, useState } from 'react'
-
-interface Visit { t: number; p: string; c: string; ci: string; device: string; os: string; browser: string; ref: string; src: string }
-type Row = [string, number]
-interface Stats {
-  days: number; total: number; unique: number; truncated: boolean
-  pages: Row[]; countries: Row[]; sources: Row[]; devices: Row[]; browsers: Row[]
-  daily: { d: string; n: number }[]; recent: Visit[]
-}
-
-const SITE = 'https://khalid-oyekunle.vercel.app'
-const VERCEL = 'https://vercel.com/khaleed-x/khalid_oyekunle'
-const links = [
-  ['Vercel Analytics', `${VERCEL}/analytics`],
-  ['Speed Insights', `${VERCEL}/speed-insights`],
-  ['Server logs (incl. bots)', `${VERCEL}/logs`],
-  ['Deployments', `${VERCEL}/deployments`],
-  ['Google Search Console', `https://search.google.com/search-console?resource_id=${encodeURIComponent(`${SITE}/`)}`],
-  ['What Google has indexed', `https://www.google.com/search?q=site:${SITE.replace('https://', '')}`],
-]
-
-function Bars({ title, rows }: { title: string; rows: Row[] }) {
-  const max = Math.max(1, ...rows.map((r) => r[1]))
-  return (
-    <div className="admin-card">
-      <h3>{title}</h3>
-      {rows.length === 0 && <p className="admin-hint">No data yet</p>}
-      {rows.map(([k, n]) => (
-        <div className="bar-row" key={k}>
-          <span className="bar-label">{k}</span>
-          <span className="bar-track"><span className="bar-fill" style={{ width: `${(n / max) * 100}%` }} /></span>
-          <span className="bar-n">{n}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
+import { useState } from 'react'
+import { AreaChart, BarList, Donut } from './charts'
+import { change, countryName, flag, nf, timeAgo } from './format'
+import { useStats } from './hooks'
 
 export function AnalyticsHub() {
   const [days, setDays] = useState(30)
-  const [stats, setStats] = useState<Stats | null>(null)
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    let cancelled = false
-    fetch(`/api/analytics?days=${days}`)
-      .then(async (res) => {
-        const data = await res.json()
-        if (!res.ok) throw new Error(data.error ?? 'Failed to load')
-        if (!cancelled) {
-          setStats(data as Stats)
-          setError('')
-        }
-      })
-      .catch((e: Error) => !cancelled && setError(e.message))
-    return () => {
-      cancelled = true
-    }
-  }, [days])
-
-  const dailyMax = Math.max(1, ...(stats?.daily.map((d) => d.n) ?? [1]))
+  const { stats, error, loading } = useStats(days)
 
   return (
-    <div>
-      <div className="admin-row">
-        {[7, 30, 90].map((d) => (
-          <button key={d} className={`pbtn ${days === d ? 'pbtn-primary' : 'pbtn-ghost'}`} onClick={() => setDays(d)}>{d} days</button>
-        ))}
+    <div className="ad-stack">
+      <div className="ad-chips big">
+        {[7, 30, 90].map((d) => <button key={d} className={days === d ? 'on' : ''} onClick={() => setDays(d)}>Last {d} days</button>)}
       </div>
 
-      {error && (
-        <p className="admin-error">
-          {error === 'Redis is not configured' ? 'The visit log database is not connected yet. See docs/analytics-setup.md.' : error}
-        </p>
-      )}
+      {error && <div className="ad-alert"><b>Could not load analytics.</b> {error === 'Redis is not configured' ? 'The visit log database is not connected. Open the System page.' : error}</div>}
 
       {stats && (
         <>
-          <div className="stat-row">
-            <div className="admin-card"><div className="stat-big">{stats.total}</div><div className="admin-hint">Page views</div></div>
-            <div className="admin-card"><div className="stat-big">{stats.unique}</div><div className="admin-hint">Daily visitors*</div></div>
+          <div className="ad-kpis three">
+            <div className="ad-card ad-kpi"><span className="ad-label">Page views</span><strong>{nf.format(stats.total)}</strong><span className={`ad-delta ${change(stats.total, stats.prev.total).dir}`}>{change(stats.total, stats.prev.total).text} <em>vs previous</em></span></div>
+            <div className="ad-card ad-kpi"><span className="ad-label">Daily visitors</span><strong>{nf.format(stats.unique)}</strong><span className="ad-muted">Resets each day</span></div>
+            <div className="ad-card ad-kpi"><span className="ad-label">Views per day</span><strong>{(stats.total / Math.max(1, days)).toFixed(1)}</strong><span className="ad-muted">average</span></div>
           </div>
-          <p className="admin-hint">*Visitor codes reset daily, so someone returning on another day counts again.{stats.truncated && ' Showing the latest 5,000 visits only.'}</p>
 
-          <div className="admin-card">
-            <h3>Views per day</h3>
-            <div className="daily">
-              {stats.daily.map((d) => (
-                <span key={d.d} className="daily-bar" title={`${d.d}: ${d.n}`} style={{ height: `${Math.max(3, (d.n / dailyMax) * 100)}%` }} />
+          <section className={`ad-card ${loading ? 'ad-dim' : ''}`}>
+            <div className="ad-card-head"><h3>Views over time</h3></div>
+            <AreaChart points={stats.daily.map((d) => d.n)} labels={stats.daily.map((d) => d.d.slice(5))} />
+          </section>
+
+          <div className="ad-split even">
+            <section className="ad-card"><div className="ad-card-head"><h3>Top pages</h3></div><BarList rows={stats.pages} /></section>
+            <section className="ad-card"><div className="ad-card-head"><h3>Traffic sources</h3></div><BarList rows={stats.sources} /></section>
+            <section className="ad-card"><div className="ad-card-head"><h3>Countries</h3></div><BarList rows={stats.countries} label={(c) => `${flag(c)} ${countryName(c)}`} /></section>
+            <section className="ad-card"><div className="ad-card-head"><h3>Devices</h3></div><Donut rows={stats.devices} /></section>
+            <section className="ad-card"><div className="ad-card-head"><h3>Browsers</h3></div><BarList rows={stats.browsers} /></section>
+          </div>
+
+          <section className="ad-card">
+            <div className="ad-card-head"><h3>Recent visits</h3></div>
+            {stats.recent.length === 0 && <p className="ad-muted">No visits recorded yet.</p>}
+            <div className="ad-table">
+              {stats.recent.map((v, i) => (
+                <div className="ad-tr" key={`${v.t}-${i}`}>
+                  <span className="ad-td page"><b>{v.p}</b></span>
+                  <span className="ad-td">{flag(v.c)} {[v.ci, countryName(v.c)].filter(Boolean).join(', ')}</span>
+                  <span className="ad-td">{v.device} · {v.os} · {v.browser}</span>
+                  <span className="ad-td">{v.src || v.ref || 'direct'}</span>
+                  <time className="ad-td">{timeAgo(v.t)}</time>
+                </div>
               ))}
             </div>
-          </div>
-
-          <Bars title="Top pages" rows={stats.pages} />
-          <Bars title="Where visitors come from" rows={stats.sources} />
-          <Bars title="Countries" rows={stats.countries} />
-          <Bars title="Devices" rows={stats.devices} />
-          <Bars title="Browsers" rows={stats.browsers} />
-
-          <div className="admin-card">
-            <h3>Recent visits</h3>
-            {stats.recent.length === 0 && <p className="admin-hint">No visits recorded yet. Open the site in a private window to test.</p>}
-            {stats.recent.map((v, i) => (
-              <div className="visit" key={`${v.t}-${i}`}>
-                <strong>{v.p}</strong>
-                <span>{[v.ci, v.c].filter(Boolean).join(', ') || 'Unknown location'}</span>
-                <span>{v.device} · {v.os} · {v.browser}</span>
-                <span className="admin-hint">{new Date(v.t).toLocaleString()} · {v.src || v.ref || 'direct'}</span>
-              </div>
-            ))}
-          </div>
+            {stats.truncated && <p className="ad-muted">Showing the latest 5,000 visits only.</p>}
+          </section>
         </>
       )}
-
-      <div className="admin-card">
-        <h3>Quick links</h3>
-        {links.map(([name, href]) => (
-          <a key={name} className="admin-post" href={href} target="_blank" rel="noreferrer">{name} ↗</a>
-        ))}
-      </div>
     </div>
   )
 }

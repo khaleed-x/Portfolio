@@ -1,4 +1,47 @@
 export type DeployState = 'building' | 'live' | 'failed'
+export type Row = [string, number]
+
+export interface Visit {
+  t: number
+  p: string
+  c: string
+  ci: string
+  device: string
+  os: string
+  browser: string
+  ref: string
+  src: string
+}
+
+export interface Stats {
+  days: number
+  total: number
+  unique: number
+  truncated: boolean
+  prev: { total: number; unique: number }
+  pages: Row[]
+  countries: Row[]
+  sources: Row[]
+  devices: Row[]
+  browsers: Row[]
+  daily: { d: string; n: number }[]
+  recent: Visit[]
+}
+
+export interface PostMeta {
+  slug: string
+  title: string
+  date: string
+  draft: boolean
+  summary: string
+}
+
+export interface Check {
+  key: string
+  label: string
+  ok: boolean
+  hint: string
+}
 
 async function fail(res: Response): Promise<never> {
   const data = (await res.json().catch(() => null)) as { error?: string } | null
@@ -16,6 +59,12 @@ export async function listPosts(): Promise<string[]> {
   const res = await fetch('/api/posts')
   if (!res.ok) return fail(res)
   return ((await res.json()) as { slugs: string[] }).slugs
+}
+
+export async function listPostMeta(): Promise<PostMeta[]> {
+  const res = await fetch('/api/posts?list=1')
+  if (!res.ok) return fail(res)
+  return ((await res.json()) as { posts: PostMeta[] }).posts
 }
 
 export async function loadPost(slug: string): Promise<string> {
@@ -45,4 +94,16 @@ export async function getDeployState(sha: string): Promise<DeployState> {
   const res = await fetch(`/api/deploy-status?sha=${sha}`)
   if (!res.ok) return fail(res)
   return ((await res.json()) as { state: DeployState }).state
+}
+
+export async function getStats(days: number): Promise<Stats> {
+  const res = await fetch(`/api/analytics?days=${days}`)
+  if (!res.ok) return fail(res)
+  return res.json()
+}
+
+export async function getHealth(): Promise<Check[]> {
+  const res = await fetch('/api/health')
+  if (!res.ok) return fail(res)
+  return ((await res.json()) as { checks: Check[] }).checks
 }

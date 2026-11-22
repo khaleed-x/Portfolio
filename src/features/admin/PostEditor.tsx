@@ -4,14 +4,15 @@ import { parseFrontmatter } from '@/shared/lib/frontmatter'
 import { blobToBase64, compressImage } from '@/shared/lib/compressImage'
 import { loadPost, publishPost } from './api'
 import { DeployStatus } from './DeployStatus'
+import { Icon } from './icons'
 import { ShareKit } from './ShareKit'
 
 const slugify = (s: string) =>
   s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60)
 
 interface Pending {
-  path: string // repo path, e.g. public/posts/my-slug/img-123.jpg
-  url: string // public url, e.g. /posts/my-slug/img-123.jpg
+  path: string
+  url: string
   blob: Blob
   preview: string
 }
@@ -27,7 +28,7 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
   const [date, setDate] = useState('')
   const [coverUrl, setCoverUrl] = useState('')
   const [pending, setPending] = useState<Pending[]>([])
-  const [preview, setPreview] = useState(false)
+  const [showPreview, setShowPreview] = useState(false)
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
   const [published, setPublished] = useState<{ sha: string; slug: string } | null>(null)
@@ -36,6 +37,7 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
 
   const isEdit = Boolean(editSlug)
   const slugLocked = isEdit || pending.length > 0
+  const words = body.trim() ? body.trim().split(/\s+/).length : 0
 
   useEffect(() => {
     if (!editSlug) return
@@ -54,7 +56,6 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
         setBody(text.trim())
       })
       .catch((e: Error) => !cancelled && setError(e.message))
-      .finally(() => !cancelled && setBusy(''))
     return () => {
       cancelled = true
     }
@@ -67,26 +68,17 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
 
   const addImage = async (file: File, kind: 'cover' | 'inline') => {
     setError('')
-    if (!slug) return setError('Add a title first, the image folder uses the slug.')
+    if (!slug) return setError('Add a title first. The image folder uses the slug.')
     try {
       setBusy('Compressing image…')
-      const blob = await compressImage(
-        file,
-        kind === 'cover' ? { width: 1200, height: 630, maxBytes: 250_000 } : { width: 1200, maxBytes: 300_000 },
-      )
+      const blob = await compressImage(file, kind === 'cover' ? { width: 1200, height: 630, maxBytes: 250_000 } : { width: 1200, maxBytes: 300_000 })
       const name = kind === 'cover' ? `cover-${Date.now()}` : `img-${Date.now()}`
-      const item: Pending = {
-        path: `public/posts/${slug}/${name}.jpg`,
-        url: `/posts/${slug}/${name}.jpg`,
-        blob,
-        preview: URL.createObjectURL(blob),
-      }
+      const item: Pending = { path: `public/posts/${slug}/${name}.jpg`, url: `/posts/${slug}/${name}.jpg`, blob, preview: URL.createObjectURL(blob) }
       setPending((p) => [...p, item])
       if (kind === 'cover') {
         setCoverUrl(item.url)
       } else {
-        const el = bodyRef.current
-        const at = el?.selectionStart ?? body.length
+        const at = bodyRef.current?.selectionStart ?? body.length
         setBody(`${body.slice(0, at)}\n\n![Describe the image](${item.url})\n\n${body.slice(at)}`)
       }
     } catch (e) {
@@ -103,8 +95,8 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
     if (!title.trim() || !slug || body.trim().length < 20) return setError('Add a title and some text first.')
     try {
       setBusy('Publishing…')
-      const usedImages = pending.filter((p) => p.url === coverUrl || body.includes(p.url))
-      const images = await Promise.all(usedImages.map(async (p) => ({ path: p.path, base64: await blobToBase64(p.blob) })))
+      const used = pending.filter((p) => p.url === coverUrl || body.includes(p.url))
+      const images = await Promise.all(used.map(async (p) => ({ path: p.path, base64: await blobToBase64(p.blob) })))
       const tagList = tags.split(',').map((t) => t.trim()).filter(Boolean)
       const markdown = [
         '---',
@@ -118,9 +110,7 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
         '',
         body.trim(),
         '',
-      ]
-        .filter((l) => l !== null)
-        .join('\n')
+      ].filter((l) => l !== null).join('\n')
       const { sha } = await publishPost({ slug, markdown, update: isEdit, images })
       setPublished({ sha, slug })
     } catch (e) {
@@ -132,84 +122,78 @@ export function PostEditor({ editSlug, onDone }: { editSlug: string | null; onDo
 
   if (published) {
     return (
-      <div>
-        <div className="admin-card">
-          <h3>{draft ? 'Draft saved' : 'Published'}</h3>
+      <div className="ad-stack narrow">
+        <section className="ad-card ad-done">
+          <span className="ad-status ok">✓</span>
+          <h3>{draft ? 'Draft saved' : isEdit ? 'Changes saved' : 'Post published'}</h3>
           <DeployStatus sha={published.sha} onLive={() => setLive(true)} />
-          {live && !draft && (
-            <a className="pbtn pbtn-primary" href={`/blog/${published.slug}`} target="_blank" rel="noreferrer">
-              Open post ↗
-            </a>
-          )}
-        </div>
+          {live && !draft && <a className="pbtn pbtn-primary" href={`/blog/${published.slug}`} target="_blank" rel="noreferrer">Open post ↗</a>}
+        </section>
         {!draft && <ShareKit slug={published.slug} title={title} />}
-        <button className="pbtn pbtn-ghost" onClick={onDone}>Back</button>
+        <button className="pbtn pbtn-ghost" onClick={onDone}>Back to posts</button>
       </div>
     )
   }
 
   return (
-    <div className="admin-card">
-      <h3>{isEdit ? `Edit: ${editSlug}` : 'New post'}</h3>
-
-      <label className="admin-field">Title
-        <input value={title} onChange={(e) => onTitle(e.target.value)} placeholder="Post title" />
-      </label>
-      <label className="admin-field">Slug (the link ends with this)
-        <input
-          value={slug}
-          disabled={slugLocked}
-          onChange={(e) => {
-            setSlugTouched(true)
-            setSlug(slugify(e.target.value))
-          }}
-        />
-      </label>
-      <label className="admin-field">Summary (shown in link previews)
-        <textarea rows={2} value={summary} onChange={(e) => setSummary(e.target.value)} />
-      </label>
-      <label className="admin-field">Tags, separated by commas
-        <input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="dotnet, notes" />
-      </label>
-
-      <div className="admin-field">
-        Cover image (auto-cropped to 1200×630 and compressed)
-        <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && addImage(e.target.files[0], 'cover')} />
-        {coverUrl && <img className="admin-thumb" src={previewMap[coverUrl] ?? coverUrl} alt="" />}
-      </div>
-
-      <div className="admin-field">
-        Post text (Markdown)
-        <div className="admin-row">
-          <label className="pbtn pbtn-ghost">
-            + Image
-            <input hidden type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && addImage(e.target.files[0], 'inline')} />
-          </label>
-          <button type="button" className="pbtn pbtn-ghost" onClick={() => setPreview((p) => !p)}>
-            {preview ? 'Edit' : 'Preview'}
-          </button>
-        </div>
-        {preview ? (
-          <div className="detail-body prose">
-            <ReactMarkdown urlTransform={(u) => previewMap[u] ?? u}>{body}</ReactMarkdown>
-          </div>
-        ) : (
-          <textarea ref={bodyRef} rows={14} value={body} onChange={(e) => setBody(e.target.value)} />
-        )}
-      </div>
-
-      <label className="admin-check">
-        <input type="checkbox" checked={draft} onChange={(e) => setDraft(e.target.checked)} />
-        Save as draft (hidden on the live site)
-      </label>
-
-      {error && <p className="admin-error">{error}</p>}
-      {busy && <p className="admin-hint">{busy}</p>}
-      <div className="admin-row">
+    <div className="ed">
+      <div className="ed-bar">
+        <button className="ad-icon-btn" onClick={onDone} aria-label="Back"><Icon name="back" size={18} /></button>
+        <span className="ad-muted">{words} words</span>
+        <button className="ad-chip-btn ed-toggle" onClick={() => setShowPreview((p) => !p)}>{showPreview ? 'Edit' : 'Preview'}</button>
+        <label className="ed-draft"><input type="checkbox" checked={draft} onChange={(e) => setDraft(e.target.checked)} /> Draft</label>
         <button className="pbtn pbtn-primary" disabled={Boolean(busy)} onClick={publish}>
-          {isEdit ? 'Save changes' : draft ? 'Save draft' : 'Publish'}
+          {busy || (isEdit ? 'Save changes' : draft ? 'Save draft' : 'Publish')}
         </button>
-        <button className="pbtn pbtn-ghost" onClick={onDone}>Cancel</button>
+      </div>
+      {error && <div className="ad-alert">{error}</div>}
+
+      <div className="ed-grid">
+        <div className={`ed-form ${showPreview ? 'hide' : ''}`}>
+          <section className="ad-card">
+            <label className="admin-field">Title
+              <input value={title} onChange={(e) => onTitle(e.target.value)} placeholder="Post title" />
+            </label>
+            <label className="admin-field">Link ending (slug)
+              <input value={slug} disabled={slugLocked} onChange={(e) => { setSlugTouched(true); setSlug(slugify(e.target.value)) }} />
+            </label>
+            <label className="admin-field">Summary (shown in link previews)
+              <textarea rows={2} value={summary} onChange={(e) => setSummary(e.target.value)} />
+            </label>
+            <label className="admin-field">Tags, separated by commas
+              <input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="dotnet, notes" />
+            </label>
+          </section>
+
+          <section className="ad-card">
+            <div className="admin-field">
+              Cover image (cropped to 1200×630 and compressed)
+              <input type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && addImage(e.target.files[0], 'cover')} />
+              {coverUrl && <img className="admin-thumb" src={previewMap[coverUrl] ?? coverUrl} alt="" />}
+            </div>
+          </section>
+
+          <section className="ad-card">
+            <div className="ad-card-head">
+              <h3>Post text</h3>
+              <label className="ad-chip-btn">+ Image
+                <input hidden type="file" accept="image/*" onChange={(e) => e.target.files?.[0] && addImage(e.target.files[0], 'inline')} />
+              </label>
+            </div>
+            <textarea ref={bodyRef} className="ed-text" rows={18} value={body} onChange={(e) => setBody(e.target.value)} placeholder="Write in Markdown…" />
+          </section>
+        </div>
+
+        <aside className={`ed-preview ${showPreview ? 'show' : ''}`}>
+          <div className="ad-card ed-paper">
+            <span className="ad-label">Live preview</span>
+            <h1>{title || 'Untitled'}</h1>
+            {coverUrl && <img className="admin-thumb" src={previewMap[coverUrl] ?? coverUrl} alt="" />}
+            <div className="detail-body prose">
+              <ReactMarkdown urlTransform={(u) => previewMap[u] ?? u}>{body}</ReactMarkdown>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   )

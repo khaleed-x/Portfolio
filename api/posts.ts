@@ -13,7 +13,22 @@ interface PublishBody {
 
 export async function GET(req: Request) {
   if (!(await requireAdmin(req))) return json({ error: 'Unauthorised' }, 401)
-  const slug = new URL(req.url).searchParams.get('slug')
+  const params = new URL(req.url).searchParams
+  if (params.get('list')) {
+    const names = (await listDir(POSTS_DIR)).filter((n) => n.endsWith('.md'))
+    const posts = await Promise.all(
+      names.map(async (n) => {
+        const slug = n.replace(/\.md$/, '')
+        const md = (await readFile(`${POSTS_DIR}/${slug}.md`)) ?? ''
+        const fm = md.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? ''
+        const get = (k: string) => fm.match(new RegExp(`^${k}:\\s*(.*)$`, 'm'))?.[1]?.trim().replace(/^["']|["']$/g, '') ?? ''
+        return { slug, title: get('title') || slug, date: get('date'), draft: get('draft') === 'true', summary: get('summary') }
+      }),
+    )
+    posts.sort((a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0))
+    return json({ posts })
+  }
+  const slug = params.get('slug')
   if (slug) {
     if (!SLUG.test(slug)) return json({ error: 'Bad slug' }, 400)
     const markdown = await readFile(`${POSTS_DIR}/${slug}.md`)

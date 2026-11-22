@@ -27,6 +27,8 @@ export async function GET(req: Request) {
     const since = Date.now() - days * 86_400_000
     const raw = await redis<string[]>('ZRANGEBYSCORE', 'visits', since, '+inf', 'LIMIT', 0, 5000)
     const visits = raw.map((s) => JSON.parse(s) as Visit)
+    const prevRaw = await redis<string[]>('ZRANGEBYSCORE', 'visits', since - days * 86_400_000, `(${since}`, 'LIMIT', 0, 5000)
+    const prevVisits = prevRaw.map((s) => JSON.parse(s) as Visit)
 
     const perDay = new Map<string, number>()
     for (let i = days - 1; i >= 0; i--) perDay.set(new Date(Date.now() - i * 86_400_000).toISOString().slice(0, 10), 0)
@@ -40,6 +42,7 @@ export async function GET(req: Request) {
       total: visits.length,
       unique: new Set(visits.map((v) => v.v)).size,
       truncated: raw.length >= 5000,
+      prev: { total: prevVisits.length, unique: new Set(prevVisits.map((v) => v.v)).size },
       pages: tally(visits.map((v) => v.p)),
       countries: tally(visits.map((v) => v.c)),
       sources: tally(visits.map((v) => v.src || v.ref || 'direct')),

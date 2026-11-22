@@ -10,6 +10,7 @@ import { AdminPage } from '@/features/admin'
 import {PrivacyPage} from '@/pages/PrivacyPage'
 
 export const router = createBrowserRouter([
+  { path: 'khalid/admin', element: <AdminPage /> },
   {
     element: <RootLayout />,
     children: [
@@ -18,9 +19,9 @@ export const router = createBrowserRouter([
       { path: 'projects/:slug', element: <ProjectDetailPage /> },
       { path: 'blog', element: <BlogPage /> },
       { path: 'blog/:slug', element: <BlogPostPage /> },
-      { path: 'khalid/admin', element: <AdminPage /> },
       { path: 'privacy', element: <PrivacyPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },
 ])
+
