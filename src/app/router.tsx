@@ -8,6 +8,9 @@ import { BlogPostPage } from '@/pages/BlogPostPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { AdminPage } from '@/features/admin'
 import {PrivacyPage} from '@/pages/PrivacyPage'
+import { AboutPage } from '@/pages/AboutPage'
+
+
 
 export const router = createBrowserRouter([
   { path: 'khalid/admin', element: <AdminPage /> },
@@ -18,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'projects', element: <ProjectsPage /> },
       { path: 'projects/:slug', element: <ProjectDetailPage /> },
       { path: 'blog', element: <BlogPage /> },
+      { path: 'about', element: <AboutPage /> },
       { path: 'blog/:slug', element: <BlogPostPage /> },
       { path: 'privacy', element: <PrivacyPage /> },
       { path: '*', element: <NotFoundPage /> },
