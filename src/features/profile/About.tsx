@@ -1,4 +1,5 @@
 import { SectionHeader } from '@/shared/ui/SectionHeader'
+import { Link } from 'react-router-dom'
 // import { projects } from '@/content/projects'
 // import { skills } from '@/content/skills'
 
@@ -11,8 +12,8 @@ export function About() {
   // ]
 
   return (
-    <section className="section section-alt" id="about">
-      <SectionHeader eyebrow="// 01 — About" title="Engineering" emphasis="Philosophy" />
+    <section className="section section-alt" id="philosophy">
+      <SectionHeader eyebrow="// 01 — How I work" title="Engineering" emphasis="Philosophy" />
       <div className="about-grid">
       
 <div className="about-body">
@@ -29,6 +30,7 @@ export function About() {
     I believe good engineering is not just about making software work,
     but making it understandable and adaptable as it evolves.
   </p>
+  <Link to="/about" className="project-link">Read more about me →</Link>
 </div>
 
         <div className="stats-grid">

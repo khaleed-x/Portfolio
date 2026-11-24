@@ -5,7 +5,9 @@ import { useActiveSection } from '@/shared/hooks/useActiveSection'
 import { useScrollState } from '@/shared/hooks/useScrollState'
 import { profile } from '@/content/profile'
 
-const sections = ['about', 'services', 'projects', 'skills', 'experience',  'education', 'contact']
+const sections = ['philosophy', 'services', 'projects', 'skills', 'experience',  'education', 'contact']
+const routes: Record<string, string> = { about: '/about', blog: '/blog' }
+
 const label = (s: string) => s[0].toUpperCase() + s.slice(1)
 
 export function Navbar() {
@@ -15,7 +17,7 @@ export function Navbar() {
   const navigate = useNavigate()
   const onHome = pathname === '/'
   const activeSection = useActiveSection(sections, onHome)
-  const activeKey = onHome ? activeSection : pathname.startsWith('/blog') ? 'blog' : ''
+  const activeKey = onHome ? activeSection : pathname.startsWith('/blog') ? 'blog' : pathname.startsWith('/about') ? 'about' : ''
   const { scrolled, progress } = useScrollState()
 
   const listRef = useRef<HTMLDivElement>(null)
@@ -51,7 +53,7 @@ export function Navbar() {
     else navigate({ pathname: '/', hash: id })
   }
 
-  const items = [...sections, 'blog']
+  const items = ['about', ...sections, 'blog']
 
   return (
     <>
@@ -65,10 +67,12 @@ export function Navbar() {
           <div className="pnav-links" ref={listRef}>
             <span className="pnav-ind" />
             {items.map((id) =>
-              id === 'blog' ? (
-                <Link key={id} to="/blog" ref={(el) => void (itemRefs.current[id] = el)} className={`pnav-link ${activeKey === id ? 'active' : ''}`}>
-                  Blog
-                </Link>
+
+             id in routes ? (
+              <Link key={id} to={routes[id]} ref={(el) => void (itemRefs.current[id] = el)} className={`pnav-link ${activeKey === id ? 'active' : ''}`}>
+                {label(id)}
+              </Link>
+
               ) : (
                 <button key={id} ref={(el) => void (itemRefs.current[id] = el)} className={`pnav-link ${activeKey === id ? 'active' : ''}`} onClick={() => goTo(id)}>
                   {label(id)}
@@ -93,10 +97,12 @@ export function Navbar() {
         <nav className="pmenu-inner">
           {items.map((id, i) => {
             const style = { '--i': i } as CSSProperties
-            return id === 'blog' ? (
-              <Link key={id} to="/blog" className="pmenu-link" style={style} onClick={() => setOpen(false)}>
-                <small>0{i + 1}</small>Blog
+           
+            return id in routes ? (
+              <Link key={id} to={routes[id]} className="pmenu-link" style={style} onClick={() => setOpen(false)}>
+                <small>0{i + 1}</small>{label(id)}
               </Link>
+
             ) : (
               <button key={id} className={`pmenu-link ${activeKey === id ? 'active' : ''}`} style={style} onClick={() => goTo(id)}>
                 <small>0{i + 1}</small>{label(id)}

@@ -90,6 +90,9 @@ writeFileSync(join(dist, 'index.html'), page({ title: `${SITE_NAME} — Software
 write('blog', page({ title: `Blog · ${SITE_NAME}`, description: 'Notes and writing on backend engineering, architecture and .NET.', path: '/blog' }))
 urls.push('/blog')
 
+write('about', page({ title: `About · ${SITE_NAME}`, description: 'The story behind Khalid Oyekunle: from first lines of C# to leading engineering at Hosté, plus a gallery of work and moments.', path: '/about' }))
+urls.push('/about')
+
 // Posts
 const dir = 'src/content/posts'
 for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {

@@ -1,0 +1,32 @@
+/* About page and gallery (mobile first) */
+.about-intro { display: grid; gap: 22px; align-items: start; }
+.about-photo { width: min(220px, 60%); aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-inline: auto; }
+.story-text p { margin: 8px 0 0; color: var(--text-secondary); line-height: 1.75; }
+.about-cta { text-align: center; display: grid; gap: 16px; justify-items: center; }
+.about-cta p { margin: 0; color: var(--text-secondary); font-size: 18px; }
+
+.gal-filter { display: flex; gap: 6px; margin-bottom: 18px; }
+.gal-filter button { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); font: 500 14px var(--font-sans); cursor: pointer; }
+.gal-filter button.on { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gal { columns: 2 150px; column-gap: 10px; }
+.gal-item { position: relative; display: block; width: 100%; margin: 0 0 10px; padding: 0; border: none; border-radius: 12px; overflow: hidden; background: var(--surface); break-inside: avoid; cursor: zoom-in; }
+.gal-item img { display: block; width: 100%; height: auto; transition: transform .4s; }
+.gal-item:hover img { transform: scale(1.04); }
+.gal-item span { position: absolute; inset: auto 0 0 0; padding: 22px 10px 8px; text-align: left; font-size: 12px; color: #fff; background: linear-gradient(transparent, rgba(0, 0, 0, .7)); }
+
+.lb { position: fixed; inset: 0; z-index: 400; display: grid; place-items: center; padding: 16px; background: rgba(5, 8, 16, .92); }
+.lb figure { margin: 0; max-width: min(1000px, 100%); }
+.lb img { display: block; max-width: 100%; max-height: 78vh; margin-inline: auto; border-radius: 10px; }
+.lb figcaption { margin-top: 10px; text-align: center; color: #e2e8f0; font-size: 14px; }
+.lb figcaption span { margin-left: 8px; color: #94a3b8; }
+.lb-close, .lb-nav { position: absolute; border: none; background: rgba(255, 255, 255, .12); color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 22px; cursor: pointer; }
+.lb-close { top: calc(12px + env(safe-area-inset-top)); right: 12px; }
+.lb-nav { top: 50%; transform: translateY(-50%); }
+.lb-nav.prev { left: 8px; } .lb-nav.next { right: 8px; }
+
+@media (min-width: 760px) {
+  .about-intro { grid-template-columns: 260px 1fr; gap: 40px; }
+  .about-photo { width: 100%; margin: 0; }
+  .gal { columns: 3 200px; column-gap: 14px; }
+  .gal-item { margin-bottom: 14px; }
+}
