@@ -9,7 +9,7 @@ export interface StoryChapter {
 export const aboutIntro = {
   paragraphs: [
     "I'm a software engineer with a strong backend focus. I work primarily with C# and the .NET ecosystem, and I'm drawn to the parts of engineering that require you to think carefully: understanding a problem, making sound architectural decisions, and building systems that remain reliable and maintainable as they grow.",
-    "But software is only one part of my story. My journey has taken a few turns, from an early interest in different creative and technical fields to studying Computer Science, learning to build software, and developing a craft in men's tailoring. I still make time for both engineering and garment making. I enjoy learning how things work, getting beneath the surface, and turning what I discover into something tangible.",
+    "But software is only one part of my story. My journey has taken a few turns, from an early interest in different creative and technical fields to studying Computer Science, learning to build software, and developing a craft in men's tailoring. I still make time for both engineering and fashion designing. I enjoy learning how things work, getting beneath the surface, and turning what I discover into something tangible.",
   ],
 }
 
@@ -18,7 +18,7 @@ export const story: StoryChapter[] = [
     period: "Growing up",
     title: "Where my story begins",
     text: [
-      "I was born in Oyo State and grew up in Ogun State, around the Lagos–Ogun axis. At a very early age, I moved to live with Big Daddy, and that became an important part of my upbringing. My childhood and the places I grew up around form the background to the person I am today.",
+      "I was born in Oyo State and grew up in Ogun State, around the Lagos–Ogun axis. At a very early age, I moved to live with my Paternal Big Daddy, and that became an important part of my upbringing. My childhood and the places I grew up around form the background to the person I am today.",
       "As a child, I didn't have one fixed picture of what my future would look like. Like many people, I was still discovering what interested me and what kind of work I could imagine doing. Looking back, the different directions I considered were all part of finding my way.",
     ],
   },
@@ -26,8 +26,8 @@ export const story: StoryChapter[] = [
     period: "2020–2023",
     title: "Finding a craft in tailoring",
     text: [
-      "One of the first paths I committed myself to learning was men's tailoring. I started training around 2020 and spent the following years learning the process of turning fabric and an idea into a finished garment. My training covered a broad range of men's clothing, including trousers, casual pieces, waistcoats, and suits. I completed my apprenticeship in 2023.",
-      "Tailoring has never been something I simply tried and left behind. I still sew, take on garment-making opportunities, and enjoy the practical work involved in getting a piece right. It has taught me patience, attention to detail, and respect for the steps behind a finished result. Those lessons continue to influence how I approach engineering, too.",
+      "One of the first paths I committed myself to learning was men's clothing. I started training around 2020 and spent the following years learning the process of turning fabric and an idea into a finished garment. My training covered a broad range of men's clothing, including trousers, casual pieces, waistcoats, and suits. I completed my apprenticeship in 2023.",
+      "Tailoring has never been something I simply tried and left behind. I still sew, take on fashion designing opportunities, and enjoy the practical work involved in getting a piece right. It has taught me patience, attention to detail, and respect for the steps behind a finished result. Those lessons continue to influence how I approach engineering, too.",
     ],
   },
   {
@@ -35,11 +35,11 @@ export const story: StoryChapter[] = [
     title: "An unexpected turn towards Computer Science",
     text: [
       "When I was preparing for further education, I was still weighing up what I wanted to pursue. Architecture was one of the options I seriously considered, alongside other fields that interested me at the time. Computer Science wasn't necessarily the plan I had started with.",
-      "While I was preparing my admission choices, I came across information about Computer Science on my phone. It caught my attention enough that I changed direction and decided to give it a chance. When I gained admission to a higher institution to study Computer Science, what began as a change of mind became the starting point of a much bigger interest. What began as a change of mind became the starting point of a much bigger interest.",
+      "While I was preparing my admission choices, I came across information about Computer Science on my phone. It caught my attention enough that I changed direction and decided to give it a chance. When I gained admission to study Computer Science, what began as a change of mind became the starting point of a much bigger interest.",
     ],
   },
   {
-    period: "ND · First year",
+    period: " · First year in higher institution",
     title: "When code started making sense",
     text: [
       "My curiosity about computing grew during my first year. An Introduction to Computing course got me thinking about how a few written instructions could become something much larger: a program, an application, or even a web experience that people could use. I wanted to understand what happened between writing code and seeing a working product.",
@@ -47,7 +47,7 @@ export const story: StoryChapter[] = [
     ],
   },
   {
-    period: "2024",
+    period: "Siwes",
     title: "Discovering C# during SIWES",
     text: [
       "My SIWES industrial training at SoftcodTechNG in Ibadan gave me a more practical introduction to software development. The training exposed me to PHP for web development, C# for software development, and graphic design. Each area offered something different, but C# was the one that really stayed with me.",
@@ -63,7 +63,7 @@ export const story: StoryChapter[] = [
       "AurHER was the first project I built with .NET. It gave me an opportunity to take what I was learning and apply it to a complete e-commerce application, rather than keeping the knowledge in isolated exercises. Since then, projects have remained an important part of how I grow: each one gives me a reason to learn something new, revisit fundamentals, and become more deliberate about the way I build.",
       "C# and .NET remain my strongest technical foundation, but I don't see myself as limited to one language or ecosystem. The understanding I've developed around programming fundamentals, backend concepts, and application design has helped me move between technologies more confidently. I've worked with JavaScript, TypeScript, PHP, and Python in practical projects, and Java is also familiar territory from my early studies. I enjoy learning the differences in a language or framework and understanding the conventions of the ecosystem rather than starting from zero each time.",
       "That range is part of my work today. The backend infrastructure I currently lead at Hosté is built with TypeScript. Working with it has given me the opportunity to apply my backend engineering thinking in a different language and ecosystem, while continuing to grow beyond the .NET stack. I value having a primary area of depth while remaining adaptable enough to choose and work with the right tools for a project.",
-      "For a significant part of this journey, I was learning without having a personal computer of my own. I continued finding ways to study and practise with the resources available to me. Getting my own PC in March 2026 made it easier to settle into a more consistent development routine, but it was a step forward in a learning journey that had already been underway.",
+      "For a significant part of this journey, I was learning without having a personal computer of my own. I continued finding ways to study and practise with the resources available to me. Getting my own PC made it easier to settle into a more consistent development routine, but it was a step forward in a learning journey that had already been underway.",
     ],
   },
   {
