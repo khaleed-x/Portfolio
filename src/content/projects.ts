@@ -53,7 +53,6 @@ export const projects: Project[] = [
       'A hospitality platform built to support its core user, booking, and engagement workflows through a maintainable and scalable software architecture.',
     details: [
       'I lead the engineering infrastructure behind Hosté, overseeing its architecture, backend systems, database design, integrations, and deployment operations.',
-      '.',
     ],
     tags: [
       'Node.js',
