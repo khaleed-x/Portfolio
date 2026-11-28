@@ -42,7 +42,7 @@ const personLd = {
     'https://www.linkedin.com/in/khalid-oyekunle-54944230b',
     'https://twitter.com/khaleed_x22',
   ],
-  knowsAbout: ['C#', 'ASP.NET Core', 'Software architecture', 'Modular monoliths', 'Backend engineering'],
+  knowsAbout: ['C#', '.NET', 'ASP.NET Core', 'TypeScript', 'JavaScript', 'PHP', 'Python', 'Backend engineering', 'API design', 'Database design', 'Software architecture', 'System design'],
 }
 const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL }
 
@@ -80,7 +80,7 @@ function write(path, html) {
   writeFileSync(join(dir, 'index.html'), html)
 }
 
-const siteDescription = 'Software Engineer. C#, ASP.NET Core, sound engineering principles, thoughtful system design.'
+const siteDescription = 'Backend-focused Software Engineer working primarily with C# and .NET, with experience across TypeScript, JavaScript, PHP, and Python.'
 const urls = ['/']
 
 // Home (overwrites dist/index.html with default tags)
@@ -90,7 +90,7 @@ writeFileSync(join(dist, 'index.html'), page({ title: `${SITE_NAME} — Software
 write('blog', page({ title: `Blog · ${SITE_NAME}`, description: 'Notes and writing on backend engineering, architecture and .NET.', path: '/blog' }))
 urls.push('/blog')
 
-write('about', page({ title: `About · ${SITE_NAME}`, description: 'The story behind Khalid Oyekunle: from first lines of C# to leading engineering at Hosté, plus a gallery of work and moments.', path: '/about' }))
+write('about', page({ title: `About · ${SITE_NAME}`, description: 'The story behind Khalid Oyekunle: his journey into software engineering, education, men's tailoring, and the experiences shaping his work and interests.', path: '/about' }))
 urls.push('/about')
 
 // Posts
