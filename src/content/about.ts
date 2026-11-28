@@ -18,7 +18,7 @@ export const story: StoryChapter[] = [
     period: "Growing up",
     title: "Where my story begins",
     text: [
-      "I was born in Oyo State and grew up in Ogun State, around the Lagos–Ogun axis. At a very early age, I moved to live with my Paternal Big Daddy, and that became an important part of my upbringing. My childhood and the places I grew up around form the background to the person I am today.",
+      "I was born in Oyo State and grew up in Ogun State, around the Lagos–Ogun axis. At a very early age, I moved to live with my Big Daddy, and that became an important part of my upbringing. My childhood and the places I grew up around form the background to the person I am today.",
       "As a child, I didn't have one fixed picture of what my future would look like. Like many people, I was still discovering what interested me and what kind of work I could imagine doing. Looking back, the different directions I considered were all part of finding my way.",
     ],
   },
@@ -39,7 +39,7 @@ export const story: StoryChapter[] = [
     ],
   },
   {
-    period: " · First year in higher institution",
+    period: "First year in higher institution",
     title: "When code started making sense",
     text: [
       "My curiosity about computing grew during my first year. An Introduction to Computing course got me thinking about how a few written instructions could become something much larger: a program, an application, or even a web experience that people could use. I wanted to understand what happened between writing code and seeing a working product.",
@@ -47,7 +47,7 @@ export const story: StoryChapter[] = [
     ],
   },
   {
-    period: "Siwes",
+    period: "SIWES",
     title: "Discovering C# during SIWES",
     text: [
       "My SIWES industrial training at SoftcodTechNG in Ibadan gave me a more practical introduction to software development. The training exposed me to PHP for web development, C# for software development, and graphic design. Each area offered something different, but C# was the one that really stayed with me.",
