@@ -6,7 +6,7 @@ export const profile = {
   company: 'khaleed-x Technology',
   eyebrow: 'C# · .NET · TypeScript · Software Engineering',
   intro:
-  'I am a Software Engineer focused on building reliable, maintainable, and scalable software systems. I lead the engineering infrastructure at Hosté, overseeing architecture, backend systems, databases, integrations, and deployment operations. I value sound engineering principles, thoughtful system design, and building software that remains dependable as it evolves.',
+  'I am a backend-focused Software Engineer whose strongest foundation is C# and the .NET ecosystem. I also work with TypeScript, JavaScript, PHP, and Python, applying sound engineering principles to APIs, databases, architecture, and dependable software systems. In my current work at Hosté, I lead backend engineering infrastructure built with TypeScript, while continuing to deepen my .NET expertise and broader engineering judgement.',
   cvPath: '/Khalid Oyekunle CV.pdf',
   photo: '/khalid1.PNG',
   photoBadge: 'Software Engineer',
