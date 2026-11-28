@@ -35,7 +35,7 @@ export const story: StoryChapter[] = [
     title: "An unexpected turn towards Computer Science",
     text: [
       "When I was preparing for further education, I was still weighing up what I wanted to pursue. Architecture was one of the options I seriously considered, alongside other fields that interested me at the time. Computer Science wasn't necessarily the plan I had started with.",
-      "While I was preparing my admission choices, I came across information about Computer Science on my phone. It caught my attention enough that I changed direction and decided to give it a chance. I eventually gained admission to The Polytechnic Ibadan to study Computer Science. What began as a change of mind became the starting point of a much bigger interest.",
+      "While I was preparing my admission choices, I came across information about Computer Science on my phone. It caught my attention enough that I changed direction and decided to give it a chance. When I gained admission to a higher institution to study Computer Science, what began as a change of mind became the starting point of a much bigger interest. What began as a change of mind became the starting point of a much bigger interest.",
     ],
   },
   {
@@ -61,6 +61,8 @@ export const story: StoryChapter[] = [
       "After SIWES, I became more interested in what C# could do beyond the desktop applications I had first associated it with. I began discovering the wider reach of the language and its ecosystem, from web applications and backend services to other areas of software development. Around the middle to latter part of 2025, I started focusing more deliberately on .NET.",
       "I learn best when I can connect an idea to something practical. When a concept makes me curious, I research it, follow the details until I have a clearer understanding, and then look for a way to build with it. I don't like learning a technology only as a collection of syntax or definitions; I want to understand how its pieces fit together and why they work the way they do.",
       "AurHER was the first project I built with .NET. It gave me an opportunity to take what I was learning and apply it to a complete e-commerce application, rather than keeping the knowledge in isolated exercises. Since then, projects have remained an important part of how I grow: each one gives me a reason to learn something new, revisit fundamentals, and become more deliberate about the way I build.",
+      "C# and .NET remain my strongest technical foundation, but I don't see myself as limited to one language or ecosystem. The understanding I've developed around programming fundamentals, backend concepts, and application design has helped me move between technologies more confidently. I've worked with JavaScript, TypeScript, PHP, and Python in practical projects, and Java is also familiar territory from my early studies. I enjoy learning the differences in a language or framework and understanding the conventions of the ecosystem rather than starting from zero each time.",
+      "That range is part of my work today. The backend infrastructure I currently lead at Hosté is built with TypeScript. Working with it has given me the opportunity to apply my backend engineering thinking in a different language and ecosystem, while continuing to grow beyond the .NET stack. I value having a primary area of depth while remaining adaptable enough to choose and work with the right tools for a project.",
       "For a significant part of this journey, I was learning without having a personal computer of my own. I continued finding ways to study and practise with the resources available to me. Getting my own PC in March 2026 made it easier to settle into a more consistent development routine, but it was a step forward in a learning journey that had already been underway.",
     ],
   },
@@ -76,8 +78,8 @@ export const story: StoryChapter[] = [
     period: "Education",
     title: "Growing through study and practice",
     text: [
-      "I completed my National Diploma in Computer Science at The Polytechnic Ibadan in 2025 and am continuing my studies at HND level. My education has given me a formal grounding in computing, while personal projects and practical experience have helped me connect what I learn in class to the work of building real software.",
-      "I see those two sides as complementary. There is value in understanding the principles behind a subject, and there is a different kind of understanding that comes from applying them, encountering problems, and working through the details yourself.",
+      "I completed my National Diploma in Computer Science in 2025 and am continuing my studies at HND level. My education has given me a formal grounding in computing, while personal projects and practical experience have helped me connect what I learn in class to the work of building real software.",
+      "I see formal education and practical experience as complementary. There is value in understanding the principles behind a subject, and there is a different kind of understanding that comes from applying them, encountering problems, and working through the details yourself. My academic ambitions also extend beyond my current qualification: in the long term, I hope to continue through postgraduate study and earn a PhD.",
     ],
   },
   {
